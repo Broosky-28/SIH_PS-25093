@@ -1,0 +1,100 @@
+
+/* Global styles */
+body {
+  margin: 0;
+  background: #f4f9ff; /* Light blue background */
+  font-family: 'Roboto', sans-serif;
+  color: #0f172a;
+}
+
+/* App wrapper */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* AppBar (top navigation) */
+.MuiAppBar-root {
+  background: linear-gradient(90deg, #1565c0, #1e88e5); /* Blue gradient */
+}
+
+/* Nav buttons */
+.MuiButton-root {
+  text-transform: none;
+  font-weight: 500;
+}
+
+/* Centering containers */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Profile picture in dashboard */
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid #1565c0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+}
+
+/* Activity lists */
+ul.activity-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 8px;
+}
+
+ul.activity-list li {
+  background: #ffffff;
+  margin-bottom: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 5px solid #1e88e5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+}
+
+/* Login form card */
+.login-card {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 420px;
+  margin: 60px auto;
+}
+
+.login-card h5 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1565c0;
+}
+
+/* Buttons */
+button, .MuiButton-root {
+  border-radius: 8px !important;
+}
+
+/* Portfolio section */
+.portfolio-box {
+  background: #ffffff;
+  border: 1px solid #e3f2fd;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Typography tweaks */
+h2, h3, h5, h6 {
+  color: #0d47a1;
+}
+
+p, span, li {
+  color: #37474f;
+}
