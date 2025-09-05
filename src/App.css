@@ -1,5 +1,4 @@
 
-/* Global styles */
 /* =========================
    Advanced App.css (Modern)
    Paste into src/App.css
@@ -23,4 +22,352 @@
   --fs-lg: 1.125rem;
   --fs-xl: 1.5rem;
 
+  /* color tokens (light) */
+  --bg: #f4f9ff;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0f172a;
+  --primary: #1565c0; /* main blue */
+  --primary-600: #1e88e5;
+  --accent: #0288d1;
+  --glass: rgba(255,255,255,0.6);
+  --success: #2e7d32;
+  --danger: #c62828;
+
+  /* elevation */
+  --shadow-1: 0 6px 18px rgba(16,24,40,0.06);
+  --shadow-2: 0 10px 30px rgba(16,24,40,0.08);
+  --radius: 12px;
 }
+
+/* Dark theme override */
+@media (prefers-color-scheme: dark) {
+  :root{
+    --bg: #071427;
+    --card: rgba(9,20,30,0.85);
+    --muted: #9aa5b1;
+    --text: #e6eef6;
+    --glass: rgba(255,255,255,0.04);
+    --primary: #4ea8ff;
+    --primary-600: #1e88e5;
+  }
+}
+
+/* Optional JS toggle: add .theme-dark on <body> to force dark */
+body.theme-dark { --bg: #071427; --card: rgba(9,20,30,0.9); --text:#e6eef6; }
+
+/* -------------------------
+   2) Base layout & reset
+   ------------------------- */
+* { box-sizing: border-box; }
+html,body,#root { height: 100%; }
+body{
+  margin:0;
+  background: linear-gradient(180deg,var(--bg),#eaf6ff 60%);
+  font-family: "Inter", "Roboto", system-ui, -apple-system, "Segoe UI", Arial;
+  font-size: var(--font-base);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height: 1.45;
+  padding: var(--space-md);
+}
+
+/* container to center app */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1rem, 2.5vw, 2rem);
+}
+
+/* -------------------------
+   3) NavBar (modern)
+   ------------------------- */
+.header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding: .65rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35));
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(6px);
+  margin-bottom: 1.25rem;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+
+.brand .logo {
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  background: linear-gradient(135deg,var(--primary),var(--primary-600));
+  display:grid;
+  place-items:center;
+  color:white;
+  font-weight:700;
+  box-shadow: 0 4px 12px rgba(21,101,192,0.22);
+}
+
+.nav-actions { display:flex; gap:.5rem; align-items:center; }
+
+/* fancy button */
+.btn {
+  display:inline-flex;
+  gap:.5rem;
+  align-items:center;
+  padding:.55rem .8rem;
+  border-radius:10px;
+  background:var(--primary);
+  color:white;
+  border: none;
+  cursor:pointer;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .12s;
+  box-shadow: 0 6px 18px rgba(21,101,192,0.18);
+  font-weight:600;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid rgba(21,101,192,0.12);
+  box-shadow: none;
+}
+
+/* hover & active */
+.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+.btn:active { transform: translateY(0); opacity:.95; }
+
+/* -------------------------
+   4) Grid & Cards
+   ------------------------- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr; /* sidebar + main */
+  gap: 1.25rem;
+  align-items:start;
+}
+
+/* collapse to single column on small screens */
+@media (max-width: 880px){
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
+
+/* standard card */
+.card{
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: clamp(.8rem, 1.6vw, 1.25rem);
+  box-shadow: var(--shadow-1);
+  border: 1px solid rgba(13,71,161,0.04);
+}
+
+/* profile card */
+.profile-card { text-align:center; }
+.profile-pic {
+  width:120px; height:120px; border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,0.5);
+  box-shadow: 0 6px 18px rgba(2,136,209,0.16);
+  margin: .5rem auto;
+  transition: transform .25s ease;
+}
+.profile-pic:hover { transform: scale(1.04); }
+
+/* chips */
+.chips { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.5rem; }
+.chip {
+  padding:.35rem .6rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(2,136,209,0.12), rgba(21,101,192,0.06));
+  color: var(--primary-600);
+  font-weight:600;
+  font-size: .85rem;
+}
+
+/* -------------------------
+   5) Activity list (improved)
+   ------------------------- */
+.activity-list {
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+
+.activity-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: .75rem;
+  padding: .75rem;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), var(--card));
+  border: 1px solid rgba(21,101,192,0.04);
+  box-shadow: 0 4px 14px rgba(12,52,100,0.04);
+}
+
+.activity-meta { color:var(--muted); font-size: .9rem; }
+.activity-actions { display:flex; gap:.5rem; align-items:center; }
+
+/* status badge */
+.badge {
+  padding: .28rem .5rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight:700;
+}
+.badge.pending { background: #fff4e5; color: #b45309; border: 1px solid rgba(180,83,9,0.06); }
+.badge.approved { background: #e8f7ed; color: var(--success); border: 1px solid rgba(46,125,50,0.06); }
+
+/* -------------------------
+   6) Forms (material-ish)
+   ------------------------- */
+.form-row { display:flex; gap:.75rem; align-items:center; margin-bottom:.6rem; }
+.form-row .field { flex:1; }
+
+.input {
+  width:100%;
+  padding:.6rem .75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(16,24,40,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.9));
+  outline: none;
+  transition: border-color .15s ease, box-shadow .12s ease;
+}
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 6px 18px rgba(21,101,192,0.08);
+}
+
+/* file input custom (simple) */
+.file-drop {
+  padding: 1rem;
+  border: 2px dashed rgba(21,101,192,0.08);
+  border-radius: 10px;
+  text-align:center;
+  color: var(--muted);
+}
+
+/* -------------------------
+   7) Responsive cards grid
+   ------------------------- */
+.cards-grid {
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1rem;
+}
+@media (max-width:1100px){ .cards-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (max-width:600px){ .cards-grid{ grid-template-columns: 1fr; } }
+
+/* -------------------------
+   8) Animations & microinteractions
+   ------------------------- */
+/* subtle float animation for icons */
+@keyframes floaty {
+  0%{ transform: translateY(0px); }
+  50%{ transform: translateY(-6px); }
+  100%{ transform: translateY(0px); }
+}
+.icon-float { animation: floaty 4s ease-in-out infinite; }
+
+/* pulse outline on new item */
+@keyframes pulse {
+  0%{ box-shadow: 0 0 0 0 rgba(21,101,192,0.18); }
+  70%{ box-shadow: 0 0 0 12px rgba(21,101,192,0.0); }
+  100%{ box-shadow: 0 0 0 0 rgba(21,101,192,0.0); }
+}
+.new-item { animation: pulse 1.2s ease; }
+
+/* subtle fade-in on cards */
+.card { transform-origin: top center; animation: fadeIn .4s ease both; }
+@keyframes fadeIn { from{ opacity:0; transform: translateY(6px) } to{ opacity:1; transform: translateY(0) } }
+
+/* -------------------------
+   9) Skeleton Loader (useful for network latency)
+   ------------------------- */
+.skeleton {
+  display:block;
+  height:1rem;
+  background: linear-gradient(90deg,#e8f1fb,#f3f7fe,#e8f1fb);
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: shimmer 1.2s linear infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* -------------------------
+   10) QR / Portfolio box
+   ------------------------- */
+.qr-box {
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  border-radius:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), var(--card));
+  border:1px solid rgba(21,101,192,0.04);
+}
+
+/* -------------------------
+   11) Accessibility (focus states)
+   ------------------------- */
+:focus { outline: none; }
+a:focus, button:focus, .input:focus {
+  box-shadow: 0 0 0 4px rgba(21,101,192,0.12);
+  border-color: var(--primary);
+}
+
+/* high-contrast accessible utility */
+.high-contrast { filter: contrast(1.05) saturate(1.03); }
+
+/* -------------------------
+   12) Container Queries (modern) - adapt layouts inside component
+   ------------------------- */
+/* wrap any component in .card and add style based on its width */
+.card {
+  container-type: inline-size; /* enables @container */
+}
+
+/* when card becomes narrow, stack internal layout */
+@container (max-width: 420px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .activity-item { flex-direction: column; align-items: flex-start; }
+}
+
+/* -------------------------
+   13) Utility helpers
+   ------------------------- */
+.text-muted { color:var(--muted); font-size:.95rem; }
+.small { font-size:.85rem; color:var(--muted); }
+.center { text-align:center; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; }
+
+/* spacing helpers (use sparingly) */
+.mt-1 { margin-top:.5rem; }
+.mt-2 { margin-top:1rem; }
+.mb-1 { margin-bottom:.5rem; }
+
+/* -------------------------
+   14) Print (optional)
+   ------------------------- */
+@media print {
+  body { background: white; color: black; }
+  .header, .btn { display:none; }
+  .card { box-shadow:none; border: 1px solid #ddd; }
+}
+
+/* =========================
+   End of Advanced CSS
+   ========================= */
